@@ -1,0 +1,14 @@
+.header__colorMode {
+    display: inline-flex;
+    border: 2px solid green;
+}
+
+svg {
+    width: 4rem;
+    margin: 0 -0.5rem;
+}
+
+.mode {
+    border: 2px solid green;
+}
+
