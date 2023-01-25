@@ -1,14 +1,14 @@
 <!DOCTYPE html>
     <html lang="en">
         <head>
-            <meta charset="UTF-8"/>
+            <meta charset="UTF-8" />
             <title>Frontend Mentor | Rest countries api with color theme switcher</title>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <meta name="keywords" content="Rest countries api, Color theme switcher" />
-            <meta name="description" content="Rest countries api with color theme switcher challenge on Frontend Mentor"/>
-            <meta name="author" content="Darius"/>
-            <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png"/>
-            <link rel="stylesheet" href="main.css"/>
+            <meta name="description" content="Rest countries api with color theme switcher challenge on Frontend Mentor" />
+            <meta name="author" content="Darius" />
+            <!--<link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />-->
+            <link rel="stylesheet" href="main.css" />
             <!--<script defer src="main.js"></script>-->
         </head>
         <body>
@@ -16,24 +16,50 @@
                 <!--1st component-->
                 <header class="header">
                     <div class="header__title">Where in the world?</div>
-                    <div class="header__colorMode">
-                        <svg version="1.1" viewBox="0.0 0.0 960.0 720.0" fill="none" stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-                        <clipPath id="p.0"><path d="m0 0l960.0 0l0 720.0l-960.0 0l0 -720.0z" clip-rule="nonzero"/></clipPath><g clip-path="url(#p.0)"><path fill="#000000" fill-opacity="0.0" d="m0 0l960.0 0l0 720.0l-960.0 0z" fill-rule="evenodd"/>
-                        <path fill="#ffffff" d="m652.18805 414.6438l0 0c-75.11072 75.09332 -182.64697 89.3215 -240.18896 31.77951c-57.541992 -57.54196 -43.299713 -165.06415 31.811035 -240.15747l0 0c-18.211334 67.39276 -4.803833 131.18042 36.188965 172.17322c40.992798 40.99283 104.786316 54.406128 172.18896 36.204742z" fill-rule="evenodd"/>
-                        <path class="moon" stroke="#000000" stroke-width="24.0" stroke-linejoin="round" stroke-linecap="butt" d="m652.18805 414.6438l0 0c-75.11072 75.09332 -182.64697 89.3215 -240.18896 31.77951c-57.541992 -57.54196 -43.299713 -165.06415 31.811035 -240.15747l0 0c-18.211334 67.39276 -4.803833 131.18042 36.188965 172.17322c40.992798 40.99283 104.786316 54.406128 172.18896 36.204742z" fill-rule="evenodd"/></g></svg>
-                        <p class="mode">Dark Mode</p>
-                    </div>
+                    <button class="header__colorMode">
+                        <p class="mode">
+                            <ion-icon class="moon-whiteTheme" name="moon-outline"></ion-icon>
+                            <ion-icon class="moon-darkTheme" name="moon"></ion-icon>Dark Mode
+                        </p>
+                    </button>
                 </header>
-       
                 <!--2nd component-->
-        
+                <main class="main">
+                    <div class="search-and-filter">
+                        <div class="search">
+                            <label id="search__title" class="sr-only">Search for a country</label>
+                            <ion-icon class="search__icon" name="search-outline" aria-hidden="true"></ion-icon> 
+                            <input class="search__input" type="search" placeholder="Search for a country..." aria-labelledby="search__title" />
+                        </div>
+                        <div class="filter">
+                            <label id="filter__label" class="sr-only">Filter by Region</label>
+                            <select class="filter__regions" name="selectRegion" aria-labelledby="filter__label">
+                                <optgroup label="filter__regions">
+                                    <option value="all">All</option>
+                                    <option value="africa">Africa</option>
+                                    <option value="america">America</option>
+                                    <option value="asia">Asia</option>
+                                    <option value="europe">Europe</option>
+                                    <option value="oceania">Oceania</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="countries-container"></div>
+                    <div class="modal modal--hide">
+                        <label class="sr-only">Back</label>
+                        <ion-icon name="arrow-back-sharp"></ion-icon>
+                        <input class="btn" type="button" value="Back" />
+                    </div>
+                </main>             
                 <!--3rd component-->
-        
-                <!--4th component-->
                 <footer class="attribution">
                     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
                     Coded by <a href="#">@Darionas</a>.
                 </footer>
             </div>
+            <!-- scripts for icons -->
+            <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+            <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
         </body>
     </html>

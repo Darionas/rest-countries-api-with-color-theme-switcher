@@ -1,14 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@700&family=Nunito+Sans:wght@300;600;800&family=Poppins&display=swap');
+@import url(reset.css);
+@import url(FM_part.css);
+
+:root {
+    /* colors */
+    --clr-dark-blue: hsl(209, 23%, 22%);
+    --clr-vDark-blueDM: hsl(207, 26%, 17%);
+    --clr-vDark-blueLM: hsl(200, 15%, 8%);
+    --clr-dark-gray: hsl(0, 0%, 52%);
+    --clr-vLight-gray: hsl(0, 0%, 98%);
+    --clr-white: hsl(0, 0%, 100%);
+  
+
+    /* fonts */
+    --ff-primary: 'Nunito Sans', sans-serif;
+
+    --fw-300: 300; /* base */
+    --fw-600: 600;
+    --fw-800: 800;
+
+   
+    --fs-14: 0.875rem; /* base */
+    --fs-16: 1rem;  
+  
+}
+
+/* typography */
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+}
+
+p {
+    line-height: 1.5;
+}
+
+/* typography end */
+
+body {
+    font-family: var(--ff-primary);
+    font-size: var(--fs-14);
+    font-weight: var(--fw-300);
+    background-color: var(--clr-vLight-gray);  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*---------------------Mobile layout-------------------------*/
+
+body { 
+    border: 2px solid green; 
+}
+
+.grid-container {
+    display: grid;
+    
+    /*border: 2px solid green;*/
+}
+
+/* style 1st component - mobile */
+
+
+/* style 2nd component - mobile */
+
+
+/* style 3rd component - mobile */
+.attribution {
+    width: 80%;
+}
+
+/*---------------------Desktop layout------------------------*/
+@media screen and (min-width: 48rem) {
+
+   * {
+    display: none;
+   }
+
+    /* style 1st component - desktop */
+    
+
+    /* style 2nd component - desktop */
+   
+
+    /* style 3rd component - desktop */
+    /* 3rd component is styled in external style sheet */
+
+}
+
+
+/*--------------------grid area names--------------------------*/
+
+
+/*---------------------------------------------------------------*/
 .header__colorMode {
     display: inline-flex;
     border: 2px solid green;
-}
-
-svg {
-    width: 4rem;
-    margin: 0 -0.5rem;
 }
 
 .mode {
     border: 2px solid green;
 }
 
+.moon-whiteTheme {
+    font-size: 1rem;
+    --ionicon-stroke-width: 2.5rem;
+}
+
+.moon-darkTheme {
+    display: none;
+    color: white;
+    font-size: 1rem;
+}
+
+.search__icon {
+    color: hsl(0, 0%, 52%);
+    font-size: 1.5rem;
+    --ionicon-stroke-width: 3rem;
+}
