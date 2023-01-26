@@ -19,7 +19,8 @@
                     <button class="header__colorMode">
                         <p class="mode">
                             <ion-icon class="moon-whiteTheme" name="moon-outline"></ion-icon>
-                            <ion-icon class="moon-darkTheme" name="moon"></ion-icon>Dark Mode
+                            <ion-icon class="moon-darkTheme" name="moon"></ion-icon>
+                            <span class="mode__label">Dark Mode</span>
                         </p>
                     </button>
                 </header>
@@ -34,7 +35,7 @@
                         <div class="filter">
                             <label id="filter__label" class="sr-only">Filter by Region</label>
                             <select class="filter__regions" name="selectRegion" aria-labelledby="filter__label">
-                                <optgroup label="filter__regions">
+                                <optgroup class="group" label="Filter by regions:">
                                     <option value="all">All</option>
                                     <option value="africa">Africa</option>
                                     <option value="america">America</option>
@@ -45,7 +46,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="countries-container"></div>
+                    <div class="countries-container">Countries container</div>
                     <div class="modal modal--hide">
                         <label class="sr-only">Back</label>
                         <ion-icon name="arrow-back-sharp"></ion-icon>
