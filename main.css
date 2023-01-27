@@ -68,9 +68,16 @@ body {
 /* style 1st component - mobile */
 .header {
     display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        'nav';
+}
+
+.nav {
+    display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
-        'header__title header__colorMode';
+        'nav__title nav__colorMode';
     padding: 1.5rem 0;
     position: absolute;
     left: 0;
@@ -80,7 +87,7 @@ body {
     /*border: 2px solid green;*/
 }
 
-.header__title {
+.nav__title {
     font-weight: var(--fw-800);
     justify-self: start;
     margin: 0 0 0 1rem;
@@ -88,7 +95,7 @@ body {
     /*border: 2px solid green;*/
 }
 
-.header__colorMode {
+.nav__colorMode {
     font-weight: var(--fw-600);
     justify-self: end;
     text-align: right;
@@ -99,12 +106,12 @@ body {
     /*border: 2px solid green;*/
 }
 
-.moon-whiteTheme {
+.mode__moonWhite {
     font-size: 1rem;
     --ionicon-stroke-width: 2.5rem;
 }
 
-.moon-darkTheme {
+.mode__moonDark {
     display: none;
     color: white;
     font-size: 1rem;
@@ -116,8 +123,8 @@ body {
     grid-template-columns: 1fr;
     grid-template-areas:
         'search-and-filter'
-        'countries-container'
-        'modal';
+        'modal'
+        'countries-container';
     gap: 2rem;
     margin: 0 1rem 0 1rem;
     position: absolute;
@@ -176,10 +183,6 @@ body {
     display: none;
 }
 
-
-
-
-
 /* style 3rd component - mobile */
 .attribution {
     position: absolute;
@@ -187,39 +190,65 @@ body {
     right: 10%;
     bottom: 0;
     width: 80%;
-    border: 2px solid green;
+    /*border: 2px solid green;*/
 }
 
 /*---------------------Desktop layout------------------------*/
 @media screen and (min-width: 48rem) {
-
+/*
    * {
     display: none;
-   }
+   }*/
 
     /* style 1st component - desktop */
-    
+    .nav__title {
+        margin: 0 0 0 3rem;
+        font-size: var(--fs-16);
+    }
+
+    .nav__colorMode {
+        margin: 0 3rem 0 0;
+    }
 
     /* style 2nd component - desktop */
-   
+    .search-and-filter {
+        grid-template-areas:
+            'search filter';
+    }
+
+    .search__input {
+        margin: 0 0 0 1.5rem;
+        width: 45%;
+    }
+
+    .search__icon {
+        left: 3rem;
+    }
+
+    .filter__regions {
+        margin: 0 1.5rem 0 0;
+        width: 10rem;
+    }
 
     /* style 3rd component - desktop */
     /* 3rd component is styled in external style sheet */
-
 }
-
 
 /*--------------------grid area names--------------------------*/
 .header {
     grid-area: header;
 }
 
-.header__title {
-    grid-area: header__title;
+.nav {
+    grid-area: nav;
 }
 
-.header__colorMode {
-    grid-area: header__colorMode;
+.nav__title {
+    grid-area: nav__title;
+}
+
+.nav__colorMode {
+    grid-area: nav__colorMode;
 }
 
 .main {

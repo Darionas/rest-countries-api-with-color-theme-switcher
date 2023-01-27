@@ -9,23 +9,26 @@
             <meta name="author" content="Darius" />
             <!--<link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />-->
             <link rel="stylesheet" href="main.css" />
-            <!--<script defer src="main.js"></script>-->
+            <script defer src="main.js"></script>
         </head>
         <body>
             <div class="grid_container">
                 <!--1st component-->
                 <header class="header">
-                    <div class="header__title">Where in the world?</div>
-                    <button class="header__colorMode">
-                        <p class="mode">
-                            <ion-icon class="moon-whiteTheme" name="moon-outline"></ion-icon>
-                            <ion-icon class="moon-darkTheme" name="moon"></ion-icon>
-                            <span class="mode__label">Dark Mode</span>
-                        </p>
-                    </button>
+                    <nav class="nav">
+                        <div class="nav__title">Where in the world?</div>
+                        <button class="nav__colorMode">
+                            <p class="mode">
+                                <ion-icon class="mode__moonWhite" name="moon-outline"></ion-icon>
+                                <ion-icon class="mode__moonDark" name="moon"></ion-icon>
+                                <span class="mode__label">Dark Mode</span>
+                            </p>
+                        </button>
+                    </nav>
                 </header>
                 <!--2nd component-->
                 <main class="main">
+                    <h1 class="sr-only">World countries APP</h1>
                     <div class="search-and-filter">
                         <div class="search">
                             <label id="search__title" class="sr-only">Search for a country</label>
