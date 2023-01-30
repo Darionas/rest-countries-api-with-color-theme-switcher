@@ -52,7 +52,7 @@ body {
 
 /*---------------------Mobile layout-------------------------*/
 
-.grid-container {
+.grid__container {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -62,6 +62,8 @@ body {
     gap: 4rem;
     justify-items: center;
     position: relative;
+    min-width: 100%;
+    min-height: 100%;
     /*border: 2px solid green;*/
 }
 
@@ -71,17 +73,19 @@ body {
     grid-template-columns: 1fr;
     grid-template-areas:
         'nav';
+    /*border: 2px solid green;*/
 }
 
 .nav {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
-        'nav__title nav__colorMode';
+        'nav__title nav__container';
     padding: 1.5rem 0;
     position: absolute;
     left: 0;
     right: 0;
+    min-width: 100%;
     background-color: var(--clr-white);
     box-shadow: 0 2px 6px 0px hsl(0, 0%, 90%);
     /*border: 2px solid green;*/
@@ -89,13 +93,14 @@ body {
 
 .nav__title {
     font-weight: var(--fw-800);
+    color: var(--clr-vDark-blueLM);
     justify-self: start;
     margin: 0 0 0 1rem;
     width: 100%;
     /*border: 2px solid green;*/
 }
 
-.nav__colorMode {
+.nav__container {
     font-weight: var(--fw-600);
     justify-self: end;
     text-align: right;
@@ -106,15 +111,37 @@ body {
     /*border: 2px solid green;*/
 }
 
-.mode__moonWhite {
-    font-size: 1rem;
-    --ionicon-stroke-width: 2.5rem;
+.ionicon {
+    width: 1rem;
+    margin: 0 0.2rem 0 0;
 }
 
-.mode__moonDark {
-    display: none;
-    color: white;
-    font-size: 1rem;
+/* Dark mode */
+.moon--white {
+    stroke: #ffffff;
+    stroke-width: 0;
+}
+
+.mode__label {
+    color: var(--clr-vDark-blueLM);
+}
+
+.darkMode {
+    color: var(--clr-white);
+}
+
+.darkMode__elements {
+    color: var(--clr-white) !important;
+    background-color: var(--clr-dark-blue) !important;
+}
+
+.darkMode__background {
+    background-color: var(--clr-vDark-blueDM) !important;
+    color: var(--clr-white) !important;
+}
+
+.darkMode__placeholder::-webkit-input-placeholder {
+    color: var(--clr-white) !important;
 }
 
 /* style 2nd component - mobile */
@@ -126,12 +153,14 @@ body {
         'modal'
         'countries-container';
     gap: 2rem;
-    margin: 0 1rem 0 1rem;
-    position: absolute;
+    margin: 2rem 1rem 0 1rem;
+    width: 94%;
+    /*position: absolute;
     top: 6rem;
     left: 0;
-    right: 0;
+    right: 0;*/
     background-color: var(--clr-vLight-gray);
+    /*border: 2px solid red;*/
 }
 
 .search-and-filter {
@@ -141,17 +170,25 @@ body {
         'search'
         'filter';
     gap: 2rem;
+    /*border: 2px solid green;*/
 }
 
 .sr-only {
     display: none;
 }
 
+.search {
+    justify-self: start;
+    width: 95%;
+    position: relative;
+    /*border: 2px solid green;*/
+}
+
 .search__input {
     padding: 0.7rem;
     border: none;
     border-radius: 0.3rem;
-    width: 97%;
+    width: 100%;
     box-shadow: 0 2px 6px 0px hsl(0, 0%, 90%);
 }
 
@@ -169,14 +206,24 @@ body {
     --ionicon-stroke-width: 3rem;
 }
 
+.darkMode__searchIcon {
+    color: var(--clr-white);
+}
+
 .filter__regions {
     padding: 0.7rem;
     border: none;
     border-radius: 0.3rem;
-    width: 55%;
+    width: 45%;
     color: var(--clr-vDark-blueLM);
     font-weight: var(--fw-600); 
     box-shadow: 0 2px 6px 0px hsl(0, 0%, 90%);   
+    /*border: 2px solid green;*/
+}
+
+.countries-container {
+    /*border: 2px solid green;*/
+    width: 100%;
 }
 
 .modal--hide {
@@ -206,7 +253,7 @@ body {
         font-size: var(--fs-16);
     }
 
-    .nav__colorMode {
+    .nav__container {
         margin: 0 3rem 0 0;
     }
 
@@ -216,18 +263,20 @@ body {
             'search filter';
     }
 
+    .search {
+        width: 30rem;
+    }
+
     .search__input {
-        margin: 0 0 0 1.5rem;
-        width: 45%;
+        width: 100%;
     }
 
     .search__icon {
-        left: 3rem;
+        left: 2rem;
     }
 
     .filter__regions {
-        margin: 0 1.5rem 0 0;
-        width: 10rem;
+        width: 12rem;
     }
 
     /* style 3rd component - desktop */
@@ -247,8 +296,8 @@ body {
     grid-area: nav__title;
 }
 
-.nav__colorMode {
-    grid-area: nav__colorMode;
+.nav__container {
+    grid-area: nav__container;
 }
 
 .main {
