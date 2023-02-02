@@ -222,7 +222,8 @@ body {
 }
 
 .countries-container {
-    /*border: 2px solid green;*/
+    justify-self: center;
+    border: 2px solid green;
     width: 100%;
 }
 

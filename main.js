@@ -1,4 +1,4 @@
-'Use strict'
+//'Use strict'
 
 const toggleMode = document.querySelector('.nav__container');
 const search_icon = document.querySelector('.search__icon');
@@ -12,6 +12,8 @@ const nav_title = document.querySelector('.nav__title');
 const grid_container = document.querySelector('.grid__container');
 const main = document.querySelector('.main');
 let svg = document.querySelector('.ionicon');
+let codeArray = []; // an array to hold all countries code
+let countryArray = []; //an array to hold the names of the countries
 
 
 /* toogle theme mode */
@@ -51,3 +53,52 @@ search.addEventListener('input', () => {
         search_icon.style.visibility = 'visible';
     }   
 })
+
+
+/* code of https://github.com/ChamuMutezva/rest-countries-api-javascript */
+const fetchCountry = async(event) => {
+    const apiEndpoint = `https://restcountries.com/v3.1/all`;
+    const countries = document.querySelector('.countries-container');
+
+    await fetch(apiEndpoint)
+        .then(response => response.json())
+        .then(data => {
+            //console.log(data);
+            data.forEach(element => {
+                const {cca3, borders, flags, name, population, region, capital} = element;
+
+                let country = document.createElement('div');
+                let imageBtn = document.createElement('button');
+                let countryDetails = document.createElement('div');
+                let img = document.createElement('img');
+
+                //create an array to hold all countries code
+                codeArray.push(cca3);
+                //console.log(codeArray);
+                //create an array to hold all countries name
+                countryArray.push(name.common);
+                //console.log(countryArray);
+
+                countryDetails.innerHTML = `
+                <div class="country">
+                    <h2 class="country__title">${name.common}</h2>
+                    <div class="country__details">
+                        <p class="country__population">
+                            <span class="country__population-label">Population:</span>
+                            <span class="country__population-data">${population}</span>
+                        </p>
+                        <p class="country__region">
+							<span class="country__region-label">Region:</span>
+							<span class="country__region-data">${region}</span>
+						</p>
+				        <p class="country__capital">
+							<span class="country__capital-label">Capital:</span>
+							<span class="country__capital-data">${capital}</span>
+						</p>
+                    </div>
+                </div>`
+            });
+        })
+}
+
+fetchCountry();
