@@ -24,8 +24,9 @@
 - [x] Create of repo (2nd task)
 - [x] Create HTML layout (3rd task)
 - [x] Create CSS layout according style guides (4th task)
-- [ ] Create grid layout for mobile first (5th task)
-- [ ] Craete grid layout for desktop (6th task)
-- [ ] Implement JavaScript with API (7th task)
-- [ ] Overview of solution and RWD (8th task)
+- [x] Create grid layout for mobile first (5th task)
+- [x] Craete grid layout for desktop (6th task)
+- [ ] Create modal elements (7th task)
+- [ ] Implement JavaScript with API (8th task)
+- [ ] Overview of solution and RWD (9th task)
 - [ ] Tada it is done. Congratulation you reach your goal.🎉
