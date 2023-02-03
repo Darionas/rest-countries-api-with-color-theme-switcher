@@ -41,7 +41,6 @@ toggleMode.addEventListener('click', () => {
     search_input.classList.toggle('darkMode__placeholder');
     /*----------------------------------------------------------*/
     filter_regions.classList.toggle('darkMode__elements');
-
 })
 
 
@@ -58,7 +57,7 @@ search.addEventListener('input', () => {
 /* code of https://github.com/ChamuMutezva/rest-countries-api-javascript */
 const fetchCountry = async(event) => {
     const apiEndpoint = `https://restcountries.com/v3.1/all`;
-    const countries = document.querySelector('.countries-container');
+    const countries = document.querySelector(".countries-container");
 
     await fetch(apiEndpoint)
         .then(response => response.json())
@@ -79,6 +78,17 @@ const fetchCountry = async(event) => {
                 countryArray.push(name.common);
                 //console.log(countryArray);
 
+                country.classList.add("allCountries");
+
+				img.classList.add("flags");
+				img.alt = `${name.common}'s flag`;
+				imageBtn.appendChild(img)
+				imageBtn.classList.add("image-btn")
+
+				countries.appendChild(country);
+				country.appendChild(imageBtn)
+				country.appendChild(countryDetails);
+
                 countryDetails.innerHTML = `
                 <div class="country">
                     <h2 class="country__title">${name.common}</h2>
@@ -97,6 +107,25 @@ const fetchCountry = async(event) => {
 						</p>
                     </div>
                 </div>`
+
+                img.src = `${flags.svg}`;
+				imageBtn.addEventListener("click", function () {					
+					modal.classList.remove("hide-modal")
+					mainWrapper.classList.add("hide-main-wrapper")					
+					borderArray = [];
+					if (typeof borders != "undefined") {
+						borders.map(country => {
+							codeArray.forEach((elm, index) => {
+								if (country == elm) {
+									borderArray.push(countryArray[index]);
+								}
+							})
+						})
+					}
+					modal.appendChild(modalWrapper);
+					modalTemplate(element)
+				})
+
             });
         })
 }
