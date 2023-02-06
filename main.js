@@ -11,6 +11,7 @@ const moon = document.querySelector('.moon');
 const nav_title = document.querySelector('.nav__title');
 const grid_container = document.querySelector('.grid__container');
 const main = document.querySelector('.main');
+const country = document.querySelector('.country');
 let svg = document.querySelector('.ionicon');
 let codeArray = []; // an array to hold all countries code
 let countryArray = []; //an array to hold the names of the countries
@@ -41,6 +42,7 @@ toggleMode.addEventListener('click', () => {
     search_input.classList.toggle('darkMode__placeholder');
     /*----------------------------------------------------------*/
     filter_regions.classList.toggle('darkMode__elements');
+    country.classList.toggle('darkMode__elements');
 })
 
 
@@ -63,6 +65,7 @@ const fetchCountry = async(event) => {
         .then(response => response.json())
         .then(data => {
             //console.log(data);
+            
             data.forEach(element => {
                 const {cca3, borders, flags, name, population, region, capital} = element;
 
@@ -77,17 +80,19 @@ const fetchCountry = async(event) => {
                 //create an array to hold all countries name
                 countryArray.push(name.common);
                 //console.log(countryArray);
+                //console.log(element);
 
+               
                 country.classList.add("allCountries");
-
 				img.classList.add("flags");
 				img.alt = `${name.common}'s flag`;
 				imageBtn.appendChild(img)
-				imageBtn.classList.add("image-btn")
+				imageBtn.classList.add("image__btn")
 
 				countries.appendChild(country);
 				country.appendChild(imageBtn)
 				country.appendChild(countryDetails);
+                //console.log(country);
 
                 countryDetails.innerHTML = `
                 <div class="country">

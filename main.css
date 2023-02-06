@@ -233,6 +233,16 @@ body {
     width: 100%;
 }
 
+.image__btn {
+    border: none;
+}
+
+.flags {
+    min-height: 10rem;
+    width: 100%;
+    /*border: 2px solid green;*/
+}
+
 .allCountries {
     width: 16.5rem;
     box-shadow: 0 2px 6px 0px hsl(0, 0%, 90%);  
@@ -247,7 +257,9 @@ body {
 }
 
 .country {
+    margin: -0.4rem 0 0 0;
     padding: 1rem;
+    /*background-color: var(--clr-dark-blue);*/
 }
 
 .country__title {
