@@ -11,11 +11,10 @@ const moon = document.querySelector('.moon');
 const nav_title = document.querySelector('.nav__title');
 const grid_container = document.querySelector('.grid__container');
 const main = document.querySelector('.main');
-const country = document.querySelector('.country');
 let svg = document.querySelector('.ionicon');
 let codeArray = []; // an array to hold all countries code
 let countryArray = []; //an array to hold the names of the countries
-
+let country_container, country_title, country_population, country_region, country_capital;
 
 /* toogle theme mode */
 toggleMode.addEventListener('click', () => {
@@ -42,7 +41,37 @@ toggleMode.addEventListener('click', () => {
     search_input.classList.toggle('darkMode__placeholder');
     /*----------------------------------------------------------*/
     filter_regions.classList.toggle('darkMode__elements');
-    country.classList.toggle('darkMode__elements');
+    for(let i=0; i < country_container.length; i++) {
+        country_container[i].classList.toggle('darkMode__elements');
+    }
+    for(let i=0; i < country_title.length; i++) {
+        country_title[i].classList.toggle('darkMode__text');
+    }    
+    for(let x=0; x < country_population.length; x++) {
+        let nodes = country_population[x].childNodes;
+        for(let y=0; y < nodes.length; y++) {
+            if(nodes[y].nodeName.toLowerCase() == 'span') {
+                nodes[y].classList.toggle('darkMode__text');
+            }
+        }
+    }
+    for(let x=0; x < country_region.length; x++) {
+        let nodes = country_region[x].childNodes;
+        for(let y=0; y < nodes.length; y++) {
+            if(nodes[y].nodeName.toLowerCase() == 'span') {
+                nodes[y].classList.toggle('darkMode__text');
+            }
+        }
+    }
+    for(let x=0; x < country_capital.length; x++) {
+        let nodes = country_capital[x].childNodes;
+        for(let y=0; y < nodes.length; y++) {
+            if(nodes[y].nodeName.toLowerCase() == 'span') {
+                nodes[y].classList.toggle('darkMode__text');
+            }
+        }
+    }
+
 })
 
 
@@ -68,10 +97,10 @@ const fetchCountry = async(event) => {
             
             data.forEach(element => {
                 const {cca3, borders, flags, name, population, region, capital} = element;
-
+                
                 let country = document.createElement('div');
                 let imageBtn = document.createElement('button');
-                let countryDetails = document.createElement('div');
+                 countryDetails = document.createElement('div');
                 let img = document.createElement('img');
 
                 //create an array to hold all countries code
@@ -112,6 +141,12 @@ const fetchCountry = async(event) => {
 						</p>
                     </div>
                 </div>`
+
+                country_container = document.getElementsByClassName('country');
+                country_title = document.getElementsByClassName('country__title');
+                country_population = document.getElementsByClassName('country__population');
+                country_region = document.getElementsByClassName('country__region');
+                country_capital = document.getElementsByClassName('country__capital');           
 
                 img.src = `${flags.svg}`;
 				imageBtn.addEventListener("click", function () {					

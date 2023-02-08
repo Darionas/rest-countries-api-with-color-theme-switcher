@@ -128,11 +128,15 @@ body {
 
 .darkMode {
     color: var(--clr-white);
-}
+}/*correction later*/
 
 .darkMode__elements {
     color: var(--clr-white) !important;
     background-color: var(--clr-dark-blue) !important;
+}
+
+.darkMode__text {
+    color: var(--clr-white) !important;
 }
 
 .darkMode__background {
@@ -229,7 +233,7 @@ body {
     gap: 2rem;
     justify-self: center;
     justify-items: center;
-    border: 2px solid green;
+    /*border: 2px solid green;*/
     width: 100%;
 }
 
