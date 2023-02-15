@@ -30,32 +30,34 @@
                 </header>
                 <!--2nd component-->
                 <main class="main">
-                    <h1 class="sr-only">World countries APP</h1>
-                    <div class="search-and-filter">
-                        <div class="search">
-                            <label id="search__title" class="sr-only">Search for a country</label>
-                            <ion-icon class="search__icon" name="search-outline" aria-hidden="true"></ion-icon> 
-                            <input class="search__input" type="search" placeholder="Search for a country..." aria-labelledby="search__title" />
+                    <div class="main__container">
+                        <h1 class="sr-only">World countries APP</h1>
+                        <div class="search-and-filter">
+                            <div class="search">
+                                <label id="search__title" class="sr-only">Search for a country</label>
+                                <ion-icon class="search__icon" name="search-outline" aria-hidden="true"></ion-icon> 
+                                <input class="search__input" type="search" placeholder="Search for a country..." aria-labelledby="search__title" />
+                            </div>
+                            <div class="filter">
+                                <label id="filter__label" class="sr-only">Filter by Region</label>
+                                <select class="filter__regions" name="selectRegion" aria-labelledby="filter__label">
+                                    <optgroup class="group" label="Filter by regions:">
+                                        <option value="all">All</option>
+                                        <option value="africa">Africa</option>
+                                        <option value="america">America</option>
+                                        <option value="asia">Asia</option>
+                                        <option value="europe">Europe</option>
+                                        <option value="oceania">Oceania</option>
+                                    </optgroup>
+                                </select>
+                            </div>
                         </div>
-                        <div class="filter">
-                            <label id="filter__label" class="sr-only">Filter by Region</label>
-                            <select class="filter__regions" name="selectRegion" aria-labelledby="filter__label">
-                                <optgroup class="group" label="Filter by regions:">
-                                    <option value="all">All</option>
-                                    <option value="africa">Africa</option>
-                                    <option value="america">America</option>
-                                    <option value="asia">Asia</option>
-                                    <option value="europe">Europe</option>
-                                    <option value="oceania">Oceania</option>
-                                </optgroup>
-                            </select>
-                        </div>
+                        <div class="countries-container"></div>
                     </div>
-                    <div class="countries-container"></div>
                     <div class="modal modal--hide">
-                        <label class="sr-only">Back</label>
-                        <ion-icon name="arrow-back-sharp"></ion-icon>
-                        <input class="btn" type="button" value="Back" />
+                        <button class="btn__back">
+                        <ion-icon class="arrow" name="arrow-back-sharp"></ion-icon><span class="btn">Back</span>
+                        </button>
                     </div>
                 </main>             
                 <!--3rd component-->

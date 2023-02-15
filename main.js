@@ -11,47 +11,55 @@ const moon = document.querySelector('.moon');
 const nav_title = document.querySelector('.nav__title');
 const grid_container = document.querySelector('.grid__container');
 const main = document.querySelector('.main');
+const modal = document.querySelector('.modal');
+const main_container = document.querySelector('.main__container');
+const btn_back = document.getElementsByClassName('btn__back')[0];
+const searchCountry = document.querySelector("input[type='search']");
+
 let svg = document.querySelector('.ionicon');
 let codeArray = []; // an array to hold all countries code
 let countryArray = []; //an array to hold the names of the countries
+let borderArray = []; // an array to hold countries bordering a country
 let country_container, country_title, country_population, country_region, country_capital;
 
 /* toogle theme mode */
 toggleMode.addEventListener('click', () => {
     if(mode_label.innerHTML == 'Dark Mode') {
         mode_label.innerHTML = 'Light Mode'
-        mode_label.classList.add('darkMode');
+        mode_label.classList.add('darkMode--text');/* */
         moon.classList.add('moon--white');
-        nav_title.classList.add('darkMode');
-        search_icon.classList.add('darkMode__searchIcon');
+        nav_title.classList.add('darkMode--text'); /* */
+        search_icon.classList.add('darkMode--searchIcon');
     } else {
         mode_label.innerHTML = 'Dark Mode';
-        mode_label.classList.remove('darkMode');
+        mode_label.classList.remove('darkMode--text'); /** */
         moon.classList.remove('moon--white');
-        nav_title.classList.remove('darkMode');
-        search_icon.classList.remove('darkMode__searchIcon');
+        nav_title.classList.remove('darkMode--text'); /** */
+        search_icon.classList.remove('darkMode--searchIcon');
     }
 
-    nav.classList.toggle('darkMode__elements');
-    grid_container.classList.toggle('darkMode__background');
-    main.classList.toggle('darkMode__background');
-    search_input.classList.toggle('darkMode__elements');
+    nav.classList.toggle('darkMode--elements');
+    grid_container.classList.toggle('darkMode--background');
+    main_container.classList.toggle('darkMode--background');
+    search_input.classList.toggle('darkMode--elements');
     /* Change placeholder text color */
     /* https://stackoverflow.com/questions/30117939/how-to-change-the-colour-of-placeholder-using-javascript#30117998 */
-    search_input.classList.toggle('darkMode__placeholder');
+    search_input.classList.toggle('darkMode--placeholder');
     /*----------------------------------------------------------*/
-    filter_regions.classList.toggle('darkMode__elements');
+    filter_regions.classList.toggle('darkMode--elements');
+    /*modal.classList.toggle('darkMode--elements');*/
+
     for(let i=0; i < country_container.length; i++) {
-        country_container[i].classList.toggle('darkMode__elements');
+        country_container[i].classList.toggle('darkMode--elements');
     }
     for(let i=0; i < country_title.length; i++) {
-        country_title[i].classList.toggle('darkMode__text');
+        country_title[i].classList.toggle('darkMode--text');
     }    
     for(let x=0; x < country_population.length; x++) {
         let nodes = country_population[x].childNodes;
         for(let y=0; y < nodes.length; y++) {
             if(nodes[y].nodeName.toLowerCase() == 'span') {
-                nodes[y].classList.toggle('darkMode__text');
+                nodes[y].classList.toggle('darkMode--text');
             }
         }
     }
@@ -59,7 +67,7 @@ toggleMode.addEventListener('click', () => {
         let nodes = country_region[x].childNodes;
         for(let y=0; y < nodes.length; y++) {
             if(nodes[y].nodeName.toLowerCase() == 'span') {
-                nodes[y].classList.toggle('darkMode__text');
+                nodes[y].classList.toggle('darkMode--text');
             }
         }
     }
@@ -67,7 +75,7 @@ toggleMode.addEventListener('click', () => {
         let nodes = country_capital[x].childNodes;
         for(let y=0; y < nodes.length; y++) {
             if(nodes[y].nodeName.toLowerCase() == 'span') {
-                nodes[y].classList.toggle('darkMode__text');
+                nodes[y].classList.toggle('darkMode--text');
             }
         }
     }
@@ -76,16 +84,16 @@ toggleMode.addEventListener('click', () => {
 
 
 /* hide & show search icon on enter input field */
-search.addEventListener('input', () => {
+/*search.addEventListener('input', () => {
     search_icon.style.visibility = 'hidden';
     let search_input = document.getElementsByClassName('search__input')[0].value;
     if(search_input.length == 0) {
         search_icon.style.visibility = 'visible';
     }   
-})
+})*/
 
 
-/* code of https://github.com/ChamuMutezva/rest-countries-api-javascript */
+/* updated code snippet of https://github.com/ChamuMutezva/rest-countries-api-javascript */
 const fetchCountry = async(event) => {
     const apiEndpoint = `https://restcountries.com/v3.1/all`;
     const countries = document.querySelector(".countries-container");
@@ -100,7 +108,7 @@ const fetchCountry = async(event) => {
                 
                 let country = document.createElement('div');
                 let imageBtn = document.createElement('button');
-                 countryDetails = document.createElement('div');
+                let countryDetails = document.createElement('div');
                 let img = document.createElement('img');
 
                 //create an array to hold all countries code
@@ -150,8 +158,8 @@ const fetchCountry = async(event) => {
 
                 img.src = `${flags.svg}`;
 				imageBtn.addEventListener("click", function () {					
-					modal.classList.remove("hide-modal")
-					mainWrapper.classList.add("hide-main-wrapper")					
+					modal.classList.remove("modal--hide");
+					main_container.classList.add("main__container--hide");					
 					borderArray = [];
 					if (typeof borders != "undefined") {
 						borders.map(country => {
@@ -162,12 +170,48 @@ const fetchCountry = async(event) => {
 							})
 						})
 					}
-					modal.appendChild(modalWrapper);
+					modal.appendChild(modalShow);
 					modalTemplate(element)
 				})
 
             });
         })
-}
+        .catch(error => console.log("Error :", error));
+};
+
+btn_back.addEventListener('click', () => {
+    main_container.classList.remove('main__container--hide');
+    modal.classList.add('modal--hide');
+})
 
 fetchCountry();
+
+searchCountry.addEventListener('input', (e) => {
+    const resultCountry = e.target.value; console.log(resultCountry);
+    const availableCountries = Array.from(document.querySelectorAll('.country__title'));
+    //console.log(availableCountries);
+    availableCountries.forEach(country => {
+        const myCountry = country.innerHTML.toLowerCase().trim();
+        if(myCountry === resultCountry.toLowerCase().trim()) {
+            country.closest('.allCountries').classList.remove('hide--card');
+        } else if(myCountry.includes(resultCountry.toLowerCase().trim())) {
+            country.closest('allCountires').classList.remove('hide--card');
+        } else {
+            country.closest('.allCountries').classList.add('hide--card');
+        }
+    })
+})
+
+const continentSelect = document.querySelector('select');
+console.log(continentSelect);
+continentSelect.onchange = (evt) => {
+    const availableCountries = Array.from(document.querySelectorAll('.country__region span'));
+    availableCountries.forEach(country => {
+        const myCountry = country.innerHTML.toLocaleLowerCase().trim();
+        if(myCountry == continentSelect.value || continentSelect.value === 'all') {
+            country.closest('.allCountries').classList.remove('hide--card');
+        } else {
+            country.closest('.allCountries').classList.add('hide--card');
+        }
+    })
+}
