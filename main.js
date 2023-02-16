@@ -21,8 +21,9 @@ let codeArray = []; // an array to hold all countries code
 let countryArray = []; //an array to hold the names of the countries
 let borderArray = []; // an array to hold countries bordering a country
 let country_container, country_title, country_population, country_region, country_capital;
+let modalShow = document.createElement('div');
 
-/* toogle theme mode */
+/* toogle dark/light mode */
 toggleMode.addEventListener('click', () => {
     if(mode_label.innerHTML == 'Dark Mode') {
         mode_label.innerHTML = 'Light Mode'
@@ -94,6 +95,7 @@ toggleMode.addEventListener('click', () => {
 
 
 /* updated code snippet of https://github.com/ChamuMutezva/rest-countries-api-javascript */
+/* fetch data from https://restcountries.com/ */
 const fetchCountry = async(event) => {
     const apiEndpoint = `https://restcountries.com/v3.1/all`;
     const countries = document.querySelector(".countries-container");
@@ -155,7 +157,8 @@ const fetchCountry = async(event) => {
                 country_population = document.getElementsByClassName('country__population');
                 country_region = document.getElementsByClassName('country__region');
                 country_capital = document.getElementsByClassName('country__capital');           
-
+                
+                /* define flag image as button, on click open modal element */
                 img.src = `${flags.svg}`;
 				imageBtn.addEventListener("click", function () {					
 					modal.classList.remove("modal--hide");
@@ -186,6 +189,7 @@ btn_back.addEventListener('click', () => {
 
 fetchCountry();
 
+/* search for country */
 searchCountry.addEventListener('input', (e) => {
     const resultCountry = e.target.value; console.log(resultCountry);
     const availableCountries = Array.from(document.querySelectorAll('.country__title'));
@@ -202,8 +206,9 @@ searchCountry.addEventListener('input', (e) => {
     })
 })
 
+/* filter by region */
 const continentSelect = document.querySelector('select');
-console.log(continentSelect);
+//console.log(continentSelect);
 continentSelect.onchange = (evt) => {
     const availableCountries = Array.from(document.querySelectorAll('.country__region span'));
     availableCountries.forEach(country => {
@@ -214,4 +219,83 @@ continentSelect.onchange = (evt) => {
             country.closest('.allCountries').classList.add('hide--card');
         }
     })
+}
+
+const modalTemplate = (element) => {
+	const { currencies, languages, borders, flags, name, population, region, capital, subregion, startOfWeek } = element;
+
+	const currencyObj = Object.keys(currencies);
+	const currenceList = currencyObj.map(cur => currencies[cur].name);
+	const langs = Object.values(languages);
+	const borderState = typeof borders !== "undefined";
+	modalShow.classList.add("modal-container");
+	const borderBool = modal.classList.contains("darkMode");  //check this code snippet
+
+    modalShow.innerHTML = `					
+        
+		<div class="country-details">		
+			<img class="country-details__image" src= ${flags.svg} alt="the flag of ${name.common} " tabindex=0>
+			<div class="primary-secondary">
+				<div class="primary">           
+           			 <h3 class="primary__title">${name.common}</h3>
+					 <div class="primary__divider">
+            	 	 	 <p class="primary-message">
+						   <span class="highLight">Official name:</span>${name.official}
+						</p>
+            	 		<p class="primary-message">
+						  <span class="highLight">Population:</span> ${population.toLocaleString()}
+						</p>
+           				 <p class="primary-message">
+							<span class="highLight">Region:</span> ${region}
+						</p>
+            	 	 	 <p class="primary-message">
+						   <span class="highLight">Sub region:</span> ${subregion}
+						</p>
+            	 	 	 <p class="primary-message">
+						   <span class="highLight">Capital:</span> ${capital}
+						 </p>
+					  </div>
+			    </div>
+			
+
+          		<div class="secondary">
+					<p class="secondary-message">
+						<span class="highLight">Start of Week:</span> ${startOfWeek}
+					</p>
+
+					<div class="secondary-message">
+						<span class="highLight">Currencies:</span>
+						<ul class="currency-list>	
+							${currenceList.map(cur => `<li class="currency-list__item">
+								<span class="secondary-currency">${cur}</span>
+							</li>`)}
+						</ul>							
+					</div>
+
+					<p class="secondary-message">
+					   <span class="highLight">Languages:</span> 
+					   <ul class="languages">
+						${langs.map(lang => `<li>
+						   		<span class="secondary-language">${lang}</span>
+						   </li>
+						`).join(" ")}
+						</ul>
+					</p>
+		 		 </div>
+  
+		 		 <div class="bordering-city">
+		  			<p class="bordering-content">
+					  <span class="highLight">Border countries:</span>
+					</p>
+		  			<ul class="bordering">					 
+					  ${borderState ?
+			borderArray.map(border => `<li>
+										<button class="border btn ${borderBool ? "theme-light" : ""}"> ${border}</button></li>`).join("")
+			: `<li><span>No bordering countries</span></li>`} 						
+		   			</ul>
+				 </div>		 
+			</div> 
+	</div>     
+	`
+
 }
