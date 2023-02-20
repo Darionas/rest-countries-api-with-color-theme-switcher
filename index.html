@@ -17,7 +17,7 @@
                 <header class="header">
                     <nav class="nav">
                         <div class="nav__title">Where in the world?</div>
-                        <button class="nav__container">
+                        <button class="nav__container mode__label--change">
                             <p class="nav__mode">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><title>Moon</title>
                                 <path class="moon" d="M160 136c0-30.62 4.51-61.61 16-88C99.57 81.27 48 159.32 48 248c0 119.29 96.71 
@@ -33,11 +33,11 @@
                     <div class="main__container">
                         <h1 class="sr-only">World countries APP</h1>
                         <div class="search-and-filter">
-                            <div class="search">
-                                <label id="search__title" class="sr-only">Search for a country</label>
+                            <label class="search">
+                                <span id="search__title" class="sr-only">Search for a country</span>
                                 <ion-icon class="search__icon" name="search-outline" aria-hidden="true"></ion-icon> 
-                                <input class="search__input" type="search" placeholder="Search for a country..." aria-labelledby="search__title" />
-                            </div>
+                                <input class="search__input" type="search" placeholder="search for a country..." aria-labelledby="search__title" />
+                            </label>
                             <div class="filter">
                                 <label id="filter__label" class="sr-only">Filter by Region</label>
                                 <select class="filter__regions" name="selectRegion" aria-labelledby="filter__label">
@@ -56,7 +56,7 @@
                     </div>
                     <div class="modal modal--hide">
                         <button class="btn__back">
-                        <ion-icon class="arrow" name="arrow-back-sharp"></ion-icon><span class="btn">Back</span>
+                        <ion-icon class="arrow" name="arrow-back-sharp"></ion-icon><span class="btn__back--title">Back</span>
                         </button>
                     </div>
                 </main>             
