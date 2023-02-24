@@ -151,6 +151,10 @@ body {
     color: var(--clr-white) !important;
 }
 
+.lightMode--text {
+    color: var(--clr-vDark-blueLM) !important;
+}
+
 .darkMode--background {
     background-color: var(--clr-vDark-blueDM) !important;
     color: var(--clr-white) !important;

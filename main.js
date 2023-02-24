@@ -15,43 +15,45 @@ const main_container = document.querySelector('.main__container');
 const btn_back = document.getElementsByClassName('btn__back')[0];
 const searchCountry = document.querySelector("input[type='search']");
 
+let allElem = document.querySelector('*');
+let modeType;
 let mode_label = document.getElementsByClassName('mode__label')[0];
 let svg = document.querySelector('.ionicon');
 let codeArray = []; // an array to hold all countries code
 let countryArray = []; //an array to hold the names of the countries
 let borderArray = []; // an array to hold countries bordering a country
 let country_container, country_title, country_population, country_region, country_capital,
-country_detailsData, highLight, details, imageBtn;
+country_detailsData, highLight_mode, details_mode, imageBtn, currentMode;
 let modalShow = document.createElement('div');
-let flag1 = false;
-let flag2 = false;
-let flag3 = false;
 
 
 /* toogle dark/light mode */
 toggleMode.addEventListener('click', () => {
+    modeType = document.getElementsByClassName('mode__label')[0].innerHTML;
+    const storeMode = localStorage.setItem('mode', modeType);
     if(mode_label.innerHTML == 'Dark Mode') {
-        flag2 = true;
         mode_label.innerHTML = 'Light Mode'
         mode_label.classList.add('darkMode--text');/* */
         moon.classList.add('moon--white');
         nav_title.classList.add('darkMode--text'); /* */
         search_icon.classList.add('darkMode--searchIcon');
+        allElem.classList.add('darkMode--text');
 
     } else {
-        flag3 = true;
         mode_label.innerHTML = 'Dark Mode';
         mode_label.classList.remove('darkMode--text'); /** */
         moon.classList.remove('moon--white');
         nav_title.classList.remove('darkMode--text'); /** */
         search_icon.classList.remove('darkMode--searchIcon');
-            
+        allElem.classList.remove('darkMode--text');
     }
 
     nav.classList.toggle('darkMode--elements');
     grid_container.classList.toggle('darkMode--background');
     main_container.classList.toggle('darkMode--background');
     search_input.classList.toggle('darkMode--elements');
+    modal.classList.toggle('darkMode--text');
+    
 
     /* Change placeholder text color */
     /* https://stackoverflow.com/questions/30117939/how-to-change-the-colour-of-placeholder-using-javascript#30117998 */
@@ -75,7 +77,9 @@ toggleMode.addEventListener('click', () => {
         }
     }
     
+    mode();
 })
+
 
 
 /* updated code snippet of https://github.com/ChamuMutezva/rest-countries-api-javascript */
@@ -111,7 +115,7 @@ const fetchCountry = async(event) => {
 				img.alt = `${name.common}'s flag`;
 				imageBtn.appendChild(img);
 				imageBtn.classList.add("image__btn");
-                imageBtn.classList.add('mode__label--change');
+                //imageBtn.classList.add('mode__label--change');
 
 				countries.appendChild(country);
 				country.appendChild(imageBtn)
@@ -147,9 +151,8 @@ const fetchCountry = async(event) => {
                 /* define flag image as button, on click open modal element */
                 img.src = `${flags.svg}`;
 				imageBtn.addEventListener("click", function () {
-                    flag1 = true;
-                    mode_label = document.getElementsByClassName('mode__label')[0];
-					modal.classList.remove("modal--hide");
+					mode();
+                    modal.classList.remove("modal--hide");
 					main_container.classList.add("main__container--hide");					
 					borderArray = [];
 					if (typeof borders != "undefined") {
@@ -162,12 +165,8 @@ const fetchCountry = async(event) => {
 						})
 					}
 					modal.appendChild(modalShow);
-					modalTemplate(element)
-                    /*if(mode_label.innerHTML == 'Dark Mode') {
-                       highLight.classList.remove('darkMode--text');
-                    } else {
-                        highLight.classList.add('darkMode--text');
-                    }*/
+					modalTemplate(element);
+            
 				})
 
             });
@@ -213,6 +212,11 @@ continentSelect.onchange = (evt) => {
             country.closest('.allCountries').classList.add('hide--card');
         }
     })
+}
+
+function mode() {
+    currentMode = localStorage.getItem('mode');
+    console.log(currentMode); 
 }
 
 const modalTemplate = (element) => {
@@ -276,30 +280,28 @@ const modalTemplate = (element) => {
 					</p>
 		  			<span class="bordering">					 
 					    ${borderState ? borderArray.map(border => `<span>
-							<button class="borders btn ${borderBool ? "theme-light" : ""}"> ${border}</button></span>`).join("")
+							<button class="borders btn ${borderBool ? "darkMode--text" : ""}"> ${border}</button></span>`).join("")
 			            : `<span>No bordering countries</span>`} 					
 		   			</span>
 				</div>		 
 			</div> 
 	    </div>`
-        highLight = document.getElementsByClassName('highLight');
-        details = document.getElementsByClassName('details');
-
-        document.querySelectorAll('.mode__label--change').forEach(item => {
-            item.addEventListener('click', event => {
-                mode_label = document.getElementsByClassName('mode__label')[0];
-                if((mode_label.innerHTML == 'Dark Mode') && (flag1 == true || flag2 == true)) {
-                   for(let x=0; x < highLight.length; x++) {
-                    highLight[x].classList.remove('darkMode--text');
-                   }
-                }
-                if((mode_label.innerHTML == 'Light Mode') && (flag1 == true || flag3 == true)) {
-                    for(let x=0; x < highLight.length; x++) {
-                     highLight[x].classList.add('darkMode--text');
-                    }
-                 }
-            })
-          })
+        highLight_mode = document.querySelectorAll('.highLight');
+        details_mode = document.getElementsByClassName('details');   
+       
+        if(currentMode == 'Light Mode') {
+            for(let x=0; x < highLight_mode.length; x++) {
+                //highLight_mode[x].classList.remove('darkMode--text');
+                highLight_mode[x].classList.add('lightMode--text');
+           }
+        }
+        if(currentMode == 'Dark Mode') {
+            for(let x=0; x < highLight_mode.length; x++) {
+                //highLight_mode[x].classList.add('lightMode--text');
+                highLight_mode[x].classList.add('darkMode--text');
+            }
+         }
+        
        
         const borderingCountries = document.querySelector(".bordering");
         //add an eventListener to bordering countries
