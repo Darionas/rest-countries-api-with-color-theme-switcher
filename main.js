@@ -1,5 +1,6 @@
 //'Use strict'
 
+const body = document.querySelector('.body');
 const toggleMode = document.querySelector('.nav__container');
 const search_icon = document.querySelector('.search__icon');
 const search = document.querySelector('.search');
@@ -15,9 +16,8 @@ const main_container = document.querySelector('.main__container');
 const btn_back = document.getElementsByClassName('btn__back')[0];
 const searchCountry = document.querySelector("input[type='search']");
 
-let allElem = document.querySelector('*');
 let modeType;
-let mode_label = document.getElementsByClassName('mode__label')[0];
+let mode_label = document.querySelector('.mode__label');
 let svg = document.querySelector('.ionicon');
 let codeArray = []; // an array to hold all countries code
 let countryArray = []; //an array to hold the names of the countries
@@ -25,29 +25,29 @@ let borderArray = []; // an array to hold countries bordering a country
 let country_container, country_title, country_population, country_region, country_capital,
 country_detailsData, highLight_mode, details_mode, imageBtn, currentMode;
 let modalShow = document.createElement('div');
+let exec;
 
 
-/* toogle dark/light mode */
-toggleMode.addEventListener('click', () => {
+/* toogle light & dark mode */
+if(toggleMode) {
+    toggleMode.addEventListener('click', function() {
     modeType = document.getElementsByClassName('mode__label')[0].innerHTML;
     const storeMode = localStorage.setItem('mode', modeType);
     if(mode_label.innerHTML == 'Dark Mode') {
-        mode_label.innerHTML = 'Light Mode'
-        mode_label.classList.add('darkMode--text');/* */
-        moon.classList.add('moon--white');
-        nav_title.classList.add('darkMode--text'); /* */
+        mode_label.innerHTML = 'Light Mode';
+        mode_label.classList.add('darkMode--text');
+        moon.classList.add('darkMode--moon');
+        nav_title.classList.add('darkMode--text');
         search_icon.classList.add('darkMode--searchIcon');
-        allElem.classList.add('darkMode--text');
-
     } else {
         mode_label.innerHTML = 'Dark Mode';
-        mode_label.classList.remove('darkMode--text'); /** */
-        moon.classList.remove('moon--white');
-        nav_title.classList.remove('darkMode--text'); /** */
+        mode_label.classList.remove('darkMode--text');
+        moon.classList.remove('darkMode--moon');
+        nav_title.classList.remove('darkMode--text');
         search_icon.classList.remove('darkMode--searchIcon');
-        allElem.classList.remove('darkMode--text');
     }
 
+    body.classList.toggle('darkMode--background');
     nav.classList.toggle('darkMode--elements');
     grid_container.classList.toggle('darkMode--background');
     main_container.classList.toggle('darkMode--background');
@@ -60,7 +60,7 @@ toggleMode.addEventListener('click', () => {
     search_input.classList.toggle('darkMode--placeholder');
     /*----------------------------------------------------------*/
     filter_regions.classList.toggle('darkMode--elements');
-    /*modal.classList.toggle('darkMode--elements');*/
+    modal.classList.toggle('darkMode--elements');
 
     for(let i=0; i < country_container.length; i++) {
         country_container[i].classList.toggle('darkMode--elements');
@@ -76,10 +76,8 @@ toggleMode.addEventListener('click', () => {
             }
         }
     }
-    
-    mode();
-})
-
+  }
+)};
 
 
 /* updated code snippet of https://github.com/ChamuMutezva/rest-countries-api-javascript */
@@ -151,7 +149,6 @@ const fetchCountry = async(event) => {
                 /* define flag image as button, on click open modal element */
                 img.src = `${flags.svg}`;
 				imageBtn.addEventListener("click", function () {
-					mode();
                     modal.classList.remove("modal--hide");
 					main_container.classList.add("main__container--hide");					
 					borderArray = [];
@@ -166,7 +163,6 @@ const fetchCountry = async(event) => {
 					}
 					modal.appendChild(modalShow);
 					modalTemplate(element);
-            
 				})
 
             });
@@ -214,10 +210,7 @@ continentSelect.onchange = (evt) => {
     })
 }
 
-function mode() {
-    currentMode = localStorage.getItem('mode');
-    console.log(currentMode); 
-}
+
 
 const modalTemplate = (element) => {
 	const { currencies, tld, languages, borders, flags, name, population, region, capital, subregion} = element;
@@ -289,20 +282,23 @@ const modalTemplate = (element) => {
         highLight_mode = document.querySelectorAll('.highLight');
         details_mode = document.getElementsByClassName('details');   
        
+        exec = function() {
         if(currentMode == 'Light Mode') {
             for(let x=0; x < highLight_mode.length; x++) {
                 //highLight_mode[x].classList.remove('darkMode--text');
-                highLight_mode[x].classList.add('lightMode--text');
+                highLight_mode[x].classList.add('darkMode--text');
            }
         }
         if(currentMode == 'Dark Mode') {
             for(let x=0; x < highLight_mode.length; x++) {
                 //highLight_mode[x].classList.add('lightMode--text');
-                highLight_mode[x].classList.add('darkMode--text');
+                highLight_mode[x].classList.remove('darkMode--text');
             }
-         }
+         } alert('hi');
+        }
         
-       
+    exec();
+
         const borderingCountries = document.querySelector(".bordering");
         //add an eventListener to bordering countries
         // when the btn of bordering country is clicked 
