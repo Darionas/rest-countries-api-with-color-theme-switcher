@@ -136,8 +136,8 @@ body {
     width: 5rem;
 }
 
-/* Dark mode */
-.moon--white {
+/* Light & Dark mode */
+.darkMode--moon {
     stroke: #ffffff;
     stroke-width: 0;
 }
@@ -149,10 +149,6 @@ body {
 
 .darkMode--text {
     color: var(--clr-white) !important;
-}
-
-.lightMode--text {
-    color: var(--clr-vDark-blueLM) !important;
 }
 
 .darkMode--background {
