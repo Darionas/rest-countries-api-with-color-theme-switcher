@@ -1,39 +1,41 @@
-//'Use strict'
+'Use strict'
 
 const body = document.querySelector('.body');
 const toggleMode = document.querySelector('.nav__container');
 const search_icon = document.querySelector('.search__icon');
-const search = document.querySelector('.search');
+//const search = document.querySelector('.search');
 const search_input = document.querySelector('.search__input');
 const filter_regions = document.querySelector('.filter__regions');
 const nav = document.querySelector('.nav');
 const moon = document.querySelector('.moon');
 const nav_title = document.querySelector('.nav__title');
 const grid_container = document.querySelector('.grid__container');
-const main = document.querySelector('.main');
+//const main = document.querySelector('.main');
 const modal = document.querySelector('.modal');
 const main_container = document.querySelector('.main__container');
 const btn_back = document.getElementsByClassName('btn__back')[0];
 const searchCountry = document.querySelector("input[type='search']");
 
-let modeType;
 let mode_label = document.querySelector('.mode__label');
-let svg = document.querySelector('.ionicon');
+//let svg = document.querySelector('.ionicon');
 let codeArray = []; // an array to hold all countries code
 let countryArray = []; //an array to hold the names of the countries
 let borderArray = []; // an array to hold countries bordering a country
-let country_container, country_title, country_population, country_region, country_capital,
-country_detailsData, highLight_mode, details_mode, imageBtn, currentMode;
 let modalShow = document.createElement('div');
-let exec;
+let flag = false;
+let country_container, country_title, country_population, country_region, 
+country_capital, country_detailsData, highLight_mode, details_mode, imageBtn,
+modeType, grabMode, exec, country_data;
+
 
 
 /* toogle light & dark mode */
 if(toggleMode) {
     toggleMode.addEventListener('click', function() {
     modeType = document.getElementsByClassName('mode__label')[0].innerHTML;
-    const storeMode = localStorage.setItem('mode', modeType);
-    if(mode_label.innerHTML == 'Dark Mode') {
+    localStorage.setItem('mode', modeType);
+    grabMode = localStorage.getItem('mode');
+    if(grabMode == 'Dark Mode') {
         mode_label.innerHTML = 'Light Mode';
         mode_label.classList.add('darkMode--text');
         moon.classList.add('darkMode--moon');
@@ -76,6 +78,9 @@ if(toggleMode) {
             }
         }
     }
+    if(flag == true) {
+       exec();
+    }
   }
 )};
 
@@ -101,19 +106,15 @@ const fetchCountry = async(event) => {
 
                 //create an array to hold all countries code
                 codeArray.push(cca3);
-                //console.log(codeArray);
+    
                 //create an array to hold all countries name
                 countryArray.push(name.common);
-                //console.log(countryArray);
-                //console.log(element);
-
-               
+        
                 country.classList.add("allCountries");
 				img.classList.add("flags");
 				img.alt = `${name.common}'s flag`;
 				imageBtn.appendChild(img);
 				imageBtn.classList.add("image__btn");
-                //imageBtn.classList.add('mode__label--change');
 
 				countries.appendChild(country);
 				country.appendChild(imageBtn)
@@ -149,6 +150,7 @@ const fetchCountry = async(event) => {
                 /* define flag image as button, on click open modal element */
                 img.src = `${flags.svg}`;
 				imageBtn.addEventListener("click", function () {
+                    flag = true;
                     modal.classList.remove("modal--hide");
 					main_container.classList.add("main__container--hide");					
 					borderArray = [];
@@ -209,8 +211,6 @@ continentSelect.onchange = (evt) => {
         }
     })
 }
-
-
 
 const modalTemplate = (element) => {
 	const { currencies, tld, languages, borders, flags, name, population, region, capital, subregion} = element;
@@ -281,21 +281,26 @@ const modalTemplate = (element) => {
 	    </div>`
         highLight_mode = document.querySelectorAll('.highLight');
         details_mode = document.getElementsByClassName('details');   
-       
+        country_data = document.querySelector('.country-details'); 
+
         exec = function() {
-        if(currentMode == 'Light Mode') {
+        if(grabMode == 'Dark Mode' && toggleMode) {
             for(let x=0; x < highLight_mode.length; x++) {
-                //highLight_mode[x].classList.remove('darkMode--text');
                 highLight_mode[x].classList.add('darkMode--text');
            }
+           for(let x=0; x < details_mode.length; x++) {
+                details_mode[x].classList.add('darkMode--text');
+           }
         }
-        if(currentMode == 'Dark Mode') {
+       if(grabMode == 'Light Mode' && toggleMode) {
             for(let x=0; x < highLight_mode.length; x++) {
-                //highLight_mode[x].classList.add('lightMode--text');
                 highLight_mode[x].classList.remove('darkMode--text');
             }
-         } alert('hi');
+            for(let x=0; x < details_mode.length; x++) {
+                details_mode[x].classList.remove('darkMode--text');
+           }
         }
+    }
         
     exec();
 
