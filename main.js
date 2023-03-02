@@ -25,7 +25,7 @@ let modalShow = document.createElement('div');
 let flag = false;
 let country_container, country_title, country_population, country_region, 
 country_capital, country_detailsData, highLight_mode, details_mode, imageBtn,
-modeType, grabMode, exec, country_data;
+modeType, grabMode, exec, country_data, btn;
 
 
 
@@ -55,6 +55,7 @@ if(toggleMode) {
     main_container.classList.toggle('darkMode--background');
     search_input.classList.toggle('darkMode--elements');
     modal.classList.toggle('darkMode--text');
+    btn_back.classList.toggle('darkMode--elements');
     
 
     /* Change placeholder text color */
@@ -62,7 +63,7 @@ if(toggleMode) {
     search_input.classList.toggle('darkMode--placeholder');
     /*----------------------------------------------------------*/
     filter_regions.classList.toggle('darkMode--elements');
-    modal.classList.toggle('darkMode--elements');
+    //modal.classList.toggle('darkMode--elements');
 
     for(let i=0; i < country_container.length; i++) {
         country_container[i].classList.toggle('darkMode--elements');
@@ -219,7 +220,7 @@ const modalTemplate = (element) => {
 	const currenceList = currencyObj.map(cur => currencies[cur].name);
 	const langs = Object.values(languages);
 	const borderState = typeof borders !== "undefined";
-	modalShow.classList.add("modal-container");
+	//modalShow.classList.add("modal-container");
 	const borderBool = modal.classList.contains("darkMode--text");  //check this code snippet
 
     modalShow.innerHTML = 					
@@ -273,7 +274,7 @@ const modalTemplate = (element) => {
 					</p>
 		  			<span class="bordering">					 
 					    ${borderState ? borderArray.map(border => `<span>
-							<button class="borders btn ${borderBool ? "darkMode--text" : ""}"> ${border}</button></span>`).join("")
+							<button class="borders btn"> ${border}</button></span>`).join("")
 			            : `<span>No bordering countries</span>`} 					
 		   			</span>
 				</div>		 
@@ -281,7 +282,8 @@ const modalTemplate = (element) => {
 	    </div>`
         highLight_mode = document.querySelectorAll('.highLight');
         details_mode = document.getElementsByClassName('details');   
-        country_data = document.querySelector('.country-details'); 
+        country_data = document.querySelector('.country-details');
+        btn =  document.querySelectorAll('.btn');
 
         exec = function() {
         if(grabMode == 'Dark Mode' && toggleMode) {
@@ -291,6 +293,9 @@ const modalTemplate = (element) => {
            for(let x=0; x < details_mode.length; x++) {
                 details_mode[x].classList.add('darkMode--text');
            }
+           for(let x=0; x < btn.length; x++) {
+               btn[x].classList.add('darkMode--elements');
+           }
         }
        if(grabMode == 'Light Mode' && toggleMode) {
             for(let x=0; x < highLight_mode.length; x++) {
@@ -299,6 +304,9 @@ const modalTemplate = (element) => {
             for(let x=0; x < details_mode.length; x++) {
                 details_mode[x].classList.remove('darkMode--text');
            }
+            for(let x=0; x < btn.length; x++) {
+                 btn[x].classList.remove('darkMode--elements');
+            }
         }
     }
         
