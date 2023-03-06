@@ -3,21 +3,20 @@
 const body = document.querySelector('.body');
 const toggleMode = document.querySelector('.nav__container');
 const search_icon = document.querySelector('.search__icon');
-//const search = document.querySelector('.search');
 const search_input = document.querySelector('.search__input');
 const filter_regions = document.querySelector('.filter__regions');
 const nav = document.querySelector('.nav');
 const moon = document.querySelector('.moon');
 const nav_title = document.querySelector('.nav__title');
 const grid_container = document.querySelector('.grid__container');
-//const main = document.querySelector('.main');
 const modal = document.querySelector('.modal');
 const main_container = document.querySelector('.main__container');
 const btn_back = document.getElementsByClassName('btn__back')[0];
 const searchCountry = document.querySelector("input[type='search']");
+const allCountries = document.getElementsByClassName('allCountries');
+const flags = document.getElementsByClassName('flags');
 
 let mode_label = document.querySelector('.mode__label');
-//let svg = document.querySelector('.ionicon');
 let codeArray = []; // an array to hold all countries code
 let countryArray = []; //an array to hold the names of the countries
 let borderArray = []; // an array to hold countries bordering a country
@@ -26,7 +25,6 @@ let flag = false;
 let country_container, country_title, country_population, country_region, 
 country_capital, country_detailsData, highLight_mode, details_mode, imageBtn,
 modeType, grabMode, exec, country_data, btn;
-
 
 
 /* toogle light & dark mode */
@@ -51,18 +49,20 @@ if(toggleMode) {
 
     body.classList.toggle('darkMode--background');
     nav.classList.toggle('darkMode--elements');
+    nav.classList.toggle('shadow');
     grid_container.classList.toggle('darkMode--background');
     main_container.classList.toggle('darkMode--background');
     search_input.classList.toggle('darkMode--elements');
+    search_input.classList.toggle('shadow');
     modal.classList.toggle('darkMode--text');
-    btn_back.classList.toggle('darkMode--elements');
-    
-
+    btn_back.classList.toggle('darkMode--elements');    
+        
     /* Change placeholder text color */
     /* https://stackoverflow.com/questions/30117939/how-to-change-the-colour-of-placeholder-using-javascript#30117998 */
     search_input.classList.toggle('darkMode--placeholder');
     /*----------------------------------------------------------*/
     filter_regions.classList.toggle('darkMode--elements');
+    filter_regions.classList.toggle('shadow');
     //modal.classList.toggle('darkMode--elements');
 
     for(let i=0; i < country_container.length; i++) {
@@ -79,6 +79,13 @@ if(toggleMode) {
             }
         }
     }
+    for(let i=0; i < allCountries.length; i++) {
+        allCountries[i].classList.toggle('shadow');
+    }
+    for(let i=0; i < flags.length; i++) {
+        flags[i].classList.toggle('shadow');
+    }
+
     if(flag == true) {
        exec();
     }
@@ -100,7 +107,7 @@ const fetchCountry = async(event) => {
             data.forEach(element => {
                 const {cca3, borders, flags, name, population, region, capital} = element;
                 
-                let country = document.createElement('div');
+                country = document.createElement('div');
                 imageBtn = document.createElement('button');
                 let countryDetails = document.createElement('div');
                 let img = document.createElement('img');
@@ -220,8 +227,7 @@ const modalTemplate = (element) => {
 	const currenceList = currencyObj.map(cur => currencies[cur].name);
 	const langs = Object.values(languages);
 	const borderState = typeof borders !== "undefined";
-	//modalShow.classList.add("modal-container");
-	const borderBool = modal.classList.contains("darkMode--text");  //check this code snippet
+	//const borderBool = modal.classList.contains("darkMode--text");  //check this code snippet
 
     modalShow.innerHTML = 					
 		`<div class="country-details">		
