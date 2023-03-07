@@ -32,7 +32,7 @@ Users should be able to:
 
 ### Screenshot
 
-![Rest_countires_api](./images/rest_countires_api.png)
+![Rest_countires_api](./images/rest_countries_api.png)
 
 
 
@@ -85,7 +85,7 @@ But created with love.
 
 ### Useful resources
 
-- [/*jshint esversion: 8*/](https://groups.google.com/g/dialogflow-essentials-edition-users/c/eDwP7ZV5FyQ) - It's enable async, array functions, template literals in ES8 dialogflow. Version esversion can be set by dev.
+- [jshint esversion: 8](https://groups.google.com/g/dialogflow-essentials-edition-users/c/eDwP7ZV5FyQ) - It's enable async, array functions, template literals in ES8 dialogflow. Version esversion can be set by dev.
 - [It is tool which let's generate and implement favicons for all browsers](https://realfavicongenerator.net/) - It helps to generate favicons for all browsers.
 - [Implement service worker, fetch data from REST Countries API](https://stackoverflow.com/questions/30117939/how-to-change-the-colour-of-placeholder-using-javascript#30117998) - It is example how need to fetch data from REST Countries API.
 - [Implement light & dark mode](https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/) - Here provide guides how to create light & dark mode in different ways.
