@@ -1,4 +1,7 @@
-'Use strict'
+'Use strict';
+// About jshint https://groups.google.com/g/dialogflow-essentials-edition-users/c/eDwP7ZV5FyQ
+// It's enable async functions, arrow functions, template literals.
+/*jshint esversion: 8*/
 
 const body = document.querySelector('.body');
 const toggleMode = document.querySelector('.nav__container');
@@ -24,7 +27,7 @@ let modalShow = document.createElement('div');
 let flag = false;
 let country_container, country_title, country_population, country_region, 
 country_capital, country_detailsData, highLight_mode, details_mode, imageBtn,
-modeType, grabMode, exec, country_data, btn;
+modeType, grabMode, exec, country_data, btn, country;
 
 
 /* toogle light & dark mode */
@@ -89,13 +92,13 @@ if(toggleMode) {
     if(flag == true) {
        exec();
     }
-  }
-)};
+   });
+}
 
 
-/* updated code snippet of https://github.com/ChamuMutezva/rest-countries-api-javascript */
+/* udapted code snippet of https://github.com/ChamuMutezva/rest-countries-api-javascript */
 /* fetch data from https://restcountries.com/ */
-const fetchCountry = async(event) => {
+const fetchCountry = async() => {  //(event)
     const apiEndpoint = `https://restcountries.com/v3.1/all`;
     const countries = document.querySelector(".countries-container");
 
@@ -125,7 +128,7 @@ const fetchCountry = async(event) => {
 				imageBtn.classList.add("image__btn");
 
 				countries.appendChild(country);
-				country.appendChild(imageBtn)
+				country.appendChild(imageBtn);
 				country.appendChild(countryDetails);
                 //console.log(country);
 
@@ -146,7 +149,7 @@ const fetchCountry = async(event) => {
 							<span class="country__capital-data">${capital}</span>
 						</p>
                     </div>
-                </div>`
+                </div>`;
 
                 country_container = document.getElementsByClassName('country');
                 country_title = document.getElementsByClassName('country__title');
@@ -168,12 +171,12 @@ const fetchCountry = async(event) => {
 								if (country == elm) {
 									borderArray.push(countryArray[index]);
 								}
-							})
-						})
+							});
+						});
 					}
 					modal.appendChild(modalShow);
 					modalTemplate(element);
-				})
+				});
 
             });
         })
@@ -183,7 +186,7 @@ const fetchCountry = async(event) => {
 btn_back.addEventListener('click', () => {
     main_container.classList.remove('main__container--hide');
     modal.classList.add('modal--hide');
-})
+});
 
 fetchCountry();
 
@@ -202,8 +205,8 @@ searchCountry.addEventListener('input', (e) => {
         } else {
             country.closest('.allCountries').classList.add('hide--card');
         }
-    })
-})
+    });
+});
 
 /* filter by region */
 const continentSelect = document.querySelector('select');
@@ -217,8 +220,8 @@ continentSelect.onchange = (evt) => {
         } else {
             country.closest('.allCountries').classList.add('hide--card');
         }
-    })
-}
+    });
+};
 
 const modalTemplate = (element) => {
 	const { currencies, tld, languages, borders, flags, name, population, region, capital, subregion} = element;
@@ -285,7 +288,8 @@ const modalTemplate = (element) => {
 		   			</span>
 				</div>		 
 			</div> 
-	    </div>`
+	    </div>`;
+
         highLight_mode = document.querySelectorAll('.highLight');
         details_mode = document.getElementsByClassName('details');   
         country_data = document.querySelector('.country-details');
@@ -314,7 +318,7 @@ const modalTemplate = (element) => {
                  btn[x].classList.remove('darkMode--elements');
             }
         }
-    }
+    };
         
     exec();
 
@@ -323,7 +327,7 @@ const modalTemplate = (element) => {
         // when the btn of bordering country is clicked 
         // respective country should be displayed.
         borderingCountries.addEventListener("click", (evt) => {
-            const apiEndpoint = `https://restcountries.com/v3.1/name/${evt.target.innerHTML.trim()}`
+            const apiEndpoint = `https://restcountries.com/v3.1/name/${evt.target.innerHTML.trim()}`;
     
             fetch(apiEndpoint)
                 .then(response => response.json())
@@ -337,10 +341,10 @@ const modalTemplate = (element) => {
                             if (country == elm) {
                                 borderArray.push(countryArray[index]);
                             }
-                        })
+                        });
                     });
-                    modalTemplate(data[0])
-                })
-        })
+                    modalTemplate(data[0]);
+                });
+        });
 
-}
+};

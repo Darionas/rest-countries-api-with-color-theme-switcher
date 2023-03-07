@@ -131,7 +131,7 @@ body {
     width: 5rem;
 }
 
-/* Light & Dark mode */
+/* Dark mode */
 .darkMode--moon {
     stroke: #ffffff;
     stroke-width: 0;
