@@ -1,8 +1,6 @@
 {
-    "name": "Rest Countries",
-    "short_name": "Rest Countries",
-    "start_url": "index.html",
-    "orientation": "portrait-primary",
+    "name": "",
+    "short_name": "",
     "icons": [
         {
             "src": "/favicon/android-chrome-192x192.png",
