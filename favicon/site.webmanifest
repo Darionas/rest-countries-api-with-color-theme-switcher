@@ -1,4 +1,5 @@
 {
+    "$schema": "https://json.schemastore.org/web-manifest-combined.json",
     "name": "REST Countries",
     "short_name": "REST Countries",
     "icons": [
