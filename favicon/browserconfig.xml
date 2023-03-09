@@ -6,4 +6,9 @@
             <TileColor>#da532c</TileColor>
         </tile>
     </msapplication>
+    <system.webServer>
+     <staticContent>
+            <mimeMap fileExtension=".json" mimeType="application/json" />
+        </staticContent>
+ </system.webServer>
 </browserconfig>
