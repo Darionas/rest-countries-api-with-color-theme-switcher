@@ -1,7 +1,7 @@
 {
     "name": "REST Countries",
     "short_name": "REST Countries",
-    "start_url": "index.html",
+    "start_url": ".",
     "orientation": "portrait-primary",
     "icons": [
         {
