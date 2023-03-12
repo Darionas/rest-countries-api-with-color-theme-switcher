@@ -67,7 +67,7 @@ But created with love.
 ### What I learned
 
 - enabling async, arrow functions, template literals in ES8 dialogflow
-- generate and implement favicons for all browsers;
+- generate and implement favicon for all browsers;
 - set css properties for input placeholder;
 - implement service worker;
 - implement light & dark mode;
