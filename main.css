@@ -537,6 +537,10 @@ body {
         cursor: pointer;
     }
 
+    .flags:hover {
+        opacity: 0.4;
+    }
+
     /* style 3rd component - desktop */
     /* 3rd component is styled in external style sheet */
 
