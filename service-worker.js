@@ -1,4 +1,4 @@
-/*
+
 const filesToCache = [
   '/',
   'favicon.ico',
@@ -61,8 +61,8 @@ self.addEventListener('fetch', event => {
       })
   );
 });
-*/
 
+/*
 const cacheName = 'page_cache_v2';
 
 const urlsToCache = [
@@ -117,3 +117,4 @@ self.addEventListener('fetch', event => {
     }
   })());
 });
+*/
