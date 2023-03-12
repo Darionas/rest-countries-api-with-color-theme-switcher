@@ -1,4 +1,4 @@
-
+/*
 const filesToCache = [
   '/',
   'favicon.ico',
@@ -11,7 +11,7 @@ const filesToCache = [
   'README.md'
 ];
 
-const staticCacheName = 'pages-cache-v1';
+const staticCacheName = 'pages-cache-v3';
 
 self.addEventListener('install', event => { 
   event.waitUntil(
@@ -61,8 +61,8 @@ self.addEventListener('fetch', event => {
       })
   );
 });
+*/
 
-/*
 const cacheName = 'page_cache_v2';
 
 const urlsToCache = [
@@ -70,6 +70,8 @@ const urlsToCache = [
   'favicon.ico',
   'manifest.json',
   'index.html',
+  'main.css',
+  'main.js',
   'offline.html',
   '404.html',
   'README.md'
@@ -115,4 +117,3 @@ self.addEventListener('fetch', event => {
     }
   })());
 });
-*/
